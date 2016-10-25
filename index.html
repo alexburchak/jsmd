@@ -1,0 +1,31 @@
+<html>
+<head>
+    <script src="static/marked-0.3.6.js"></script>
+    <script src="static/jquery-3.1.1.js"></script>
+
+    <script type="application/javascript">
+        "use strict";
+
+        function load(p) {
+            var req = new XMLHttpRequest();
+            req.onload = function() {
+                $('#content').html(marked(req.response));
+            };
+            req.open("get", p);
+            req.send();
+        }
+
+        window.onhashchange = function () {
+            load('template/' + location.hash.slice(1) + '.md')
+        }
+    </script>
+</head>
+<body onload="load('README.md');">
+
+<a href="#one">One</a>
+<a href="#two">Two</a>
+
+<div id="content"></div>
+
+</body>
+</html>
